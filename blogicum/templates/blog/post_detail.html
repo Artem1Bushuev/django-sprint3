@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  Публикации в категории «{{ category.title }}»
+{% endblock %}
+
+
+{% block content %}
+<div class="container py-5">
+  <h1>Публикации в категории «{{ category.title }}»</h1>
+  <p class="mb-5">{{ category.description }}</p>
+
+  {% for post in posts %}
+    <article class="mb-5">
+      <h2>{{ post.title }}</h2>
+      <p>Категория: {{ post.category.title }} ({{ post.category.slug }})</p>
+      {% if post.location %}
+        <p>Место: {{ post.location.name }}</p>
+      {% endif %}
+      <p>{{ post.text|truncatewords:30 }}</p>
+    </article>
+  {% empty %}
+    <p>В этой категории пока нет публикаций.</p>
+  {% endfor %}
+</div>
+{% endblock %}
