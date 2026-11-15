@@ -2,7 +2,7 @@
 
 import datetime
 from django.db import migrations, models
-from django.utils.timezone import utc
+from datetime import timezone
 
 
 class Migration(migrations.Migration):
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             model_name='category',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(
-                2026, 11, 15, 11, 38, 46, 176711, tzinfo=utc), verbose_name='Добавлено'),
+                2026, 11, 15, 11, 38, 46, 176711, tzinfo=timezone.utc), verbose_name='Добавлено'),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             model_name='location',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(
-                2026, 11, 15, 11, 38, 54, 50228, tzinfo=utc), verbose_name='Добавлено'),
+                2026, 11, 15, 11, 38, 54, 50228, tzinfo=timezone.utc), verbose_name='Добавлено'),
             preserve_default=False,
         ),
         migrations.AlterField(
