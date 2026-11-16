@@ -5,8 +5,10 @@ from django.utils.text import slugify
 # Константы для магических чисел
 MAX_LENGTH_TITLE = 256
 
+
 class BaseModel(models.Model):
     """Базовая модель с общими полями для наследования."""
+
     is_published = models.BooleanField(
         default=True,
         verbose_name='Опубликовано',
@@ -53,6 +55,7 @@ class Category(BaseModel):
     def __str__(self):
         return self.title
 
+
 class Location(BaseModel):
     name = models.CharField(
         max_length=MAX_LENGTH_TITLE,
@@ -65,6 +68,7 @@ class Location(BaseModel):
 
     def __str__(self):
         return self.name
+
 
 class Post(BaseModel):
     title = models.CharField(
@@ -105,6 +109,6 @@ class Post(BaseModel):
         verbose_name_plural = 'Публикации'
         ordering = ['-pub_date']
         default_related_name = 'posts'
-        
+
     def __str__(self):
         return self.title

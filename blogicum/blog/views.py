@@ -6,21 +6,22 @@ from .models import Post, Category
 # Константа для количества отображаемых постов
 POSTS_PER_PAGE = 5
 
+
 def get_published_posts():
-    """Возвращает QuerySet опубликованных постов с актуальными датами и 
-    опубликованными категориями.
-    """
+    """Возвращает QuerySet опубликованных постов"""
     return Post.objects.filter(
         is_published=True,
         pub_date__lte=timezone.now(),
         category__is_published=True
     )
 
+
 def index(request):
     """Главная страница — пять последних опубликованных публикаций."""
     posts = get_published_posts().order_by('-pub_date')[:POSTS_PER_PAGE]
     context = {'posts': posts}
     return render(request, 'blog/index.html', context)
+
 
 def category_posts(request, slug):
     """Страница категории — публикации выбранной категории."""
@@ -38,6 +39,7 @@ def category_posts(request, slug):
         'posts': posts  # Исправлено: добавлено значение posts
     }
     return render(request, 'blog/category.html', context)
+
 
 def post_detail(request, post_id):
     """Страница отдельной публикации."""
