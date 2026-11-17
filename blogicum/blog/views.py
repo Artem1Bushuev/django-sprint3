@@ -18,7 +18,8 @@ def get_published_posts():
 
 def index(request):
     """Главная страница — пять последних опубликованных публикаций."""
-    posts = get_published_posts().order_by('-pub_date')[:POSTS_PER_PAGE]
+    # Убираем сортировку по дате публикации
+    posts = get_published_posts()[:POSTS_PER_PAGE]
     context = {'posts': posts}
     return render(request, 'blog/index.html', context)
 
@@ -29,14 +30,13 @@ def category_posts(request, slug):
         Category.objects.filter(is_published=True),
         slug=slug
     )
-    # Выбираем публикации категории с учётом условий, используя related_name
     posts = category.posts.filter(
         is_published=True,
         pub_date__lte=timezone.now()
-    ).order_by('-pub_date')
+    )
     context = {
         'category': category,
-        'posts': posts  # Исправлено: добавлено значение posts
+        'posts': posts
     }
     return render(request, 'blog/category.html', context)
 
